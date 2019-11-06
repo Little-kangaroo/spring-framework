@@ -100,6 +100,7 @@ public abstract class AbstractNestablePropertyAccessor extends AbstractPropertyA
 		this(true);
 	}
 
+
 	/**
 	 * Create a new empty accessor. Wrapped instance needs to be set afterwards.
 	 * @param registerDefaultEditors whether to register default editors
