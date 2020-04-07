@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2019 the original author or authors.
+ * Copyright 2002-2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AnnotationsScannerTests {
 
 	@Test
-	void directStrategyOnClassWhenNotAnnoatedScansNone() {
+	void directStrategyOnClassWhenNotAnnotatedScansNone() {
 		Class<?> source = WithNoAnnotations.class;
 		assertThat(scan(source, SearchStrategy.DIRECT)).isEmpty();
 	}
@@ -86,7 +86,7 @@ class AnnotationsScannerTests {
 	}
 
 	@Test
-	void inheritedAnnotationsStrategyOnClassWhenNotAnnoatedScansNone() {
+	void inheritedAnnotationsStrategyOnClassWhenNotAnnotatedScansNone() {
 		Class<?> source = WithNoAnnotations.class;
 		assertThat(scan(source, SearchStrategy.INHERITED_ANNOTATIONS)).isEmpty();
 	}
@@ -137,7 +137,7 @@ class AnnotationsScannerTests {
 	}
 
 	@Test
-	void superclassStrategyOnClassWhenNotAnnoatedScansNone() {
+	void superclassStrategyOnClassWhenNotAnnotatedScansNone() {
 		Class<?> source = WithNoAnnotations.class;
 		assertThat(scan(source, SearchStrategy.SUPERCLASS)).isEmpty();
 	}
@@ -179,7 +179,7 @@ class AnnotationsScannerTests {
 	}
 
 	@Test
-	void typeHierarchyStrategyOnClassWhenNotAnnoatedScansNone() {
+	void typeHierarchyStrategyOnClassWhenNotAnnotatedScansNone() {
 		Class<?> source = WithNoAnnotations.class;
 		assertThat(scan(source, SearchStrategy.TYPE_HIERARCHY)).isEmpty();
 	}
@@ -222,7 +222,7 @@ class AnnotationsScannerTests {
 	}
 
 	@Test
-	void directStrategyOnMethodWhenNotAnnoatedScansNone() {
+	void directStrategyOnMethodWhenNotAnnotatedScansNone() {
 		Method source = methodFrom(WithNoAnnotations.class);
 		assertThat(scan(source, SearchStrategy.DIRECT)).isEmpty();
 	}
@@ -263,7 +263,7 @@ class AnnotationsScannerTests {
 	}
 
 	@Test
-	void inheritedAnnotationsStrategyOnMethodWhenNotAnnoatedScansNone() {
+	void inheritedAnnotationsStrategyOnMethodWhenNotAnnotatedScansNone() {
 		Method source = methodFrom(WithNoAnnotations.class);
 		assertThat(scan(source, SearchStrategy.INHERITED_ANNOTATIONS)).isEmpty();
 	}
@@ -304,7 +304,7 @@ class AnnotationsScannerTests {
 	}
 
 	@Test
-	void superclassStrategyOnMethodWhenNotAnnoatedScansNone() {
+	void superclassStrategyOnMethodWhenNotAnnotatedScansNone() {
 		Method source = methodFrom(WithNoAnnotations.class);
 		assertThat(scan(source, SearchStrategy.SUPERCLASS)).isEmpty();
 	}
@@ -346,7 +346,7 @@ class AnnotationsScannerTests {
 	}
 
 	@Test
-	void typeHierarchyStrategyOnMethodWhenNotAnnoatedScansNone() {
+	void typeHierarchyStrategyOnMethodWhenNotAnnotatedScansNone() {
 		Method source = methodFrom(WithNoAnnotations.class);
 		assertThat(scan(source, SearchStrategy.TYPE_HIERARCHY)).isEmpty();
 	}
@@ -423,7 +423,7 @@ class AnnotationsScannerTests {
 	@Test
 	void typeHierarchyStrategyOnMethodWithIgnorablesScansAnnotations()
 			throws Exception {
-		Method source = methodFrom(Ignoreable.class);
+		Method source = methodFrom(Ignorable.class);
 		assertThat(scan(source, SearchStrategy.TYPE_HIERARCHY)).containsExactly(
 				"0:TestAnnotation1");
 	}
@@ -752,7 +752,7 @@ class AnnotationsScannerTests {
 	}
 
 	@SuppressWarnings("serial")
-	static class Ignoreable implements IgnoreableOverrideInterface1, IgnoreableOverrideInterface2, Serializable {
+	static class Ignorable implements IgnorableOverrideInterface1, IgnorableOverrideInterface2, Serializable {
 
 		@Override
 		@TestAnnotation1
@@ -760,13 +760,13 @@ class AnnotationsScannerTests {
 		}
 	}
 
-	interface IgnoreableOverrideInterface1 {
+	interface IgnorableOverrideInterface1 {
 
 		@Nullable
 		void method();
 	}
 
-	interface IgnoreableOverrideInterface2 {
+	interface IgnorableOverrideInterface2 {
 
 		@Nullable
 		void method();
