@@ -514,25 +514,28 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	@Override
 	public void refresh() throws BeansException, IllegalStateException {
 		synchronized (this.startupShutdownMonitor) {
-			logger.info("【AbstractApplicationContext】"+"------prepareRefresh()准备刷新------");
 			// Prepare this context for refreshing.
+			logger.info("-----【1】【AbstractApplicationContext】【prepareRefresh()】--------准备刷新容器--------------");
 			prepareRefresh();
 
-			logger.info("【AbstractApplicationContext】"+"------obtainFreshBeanFactory创建beanFactory刷新------");
+			logger.info("-----【2】 【AbstractApplicationContext】【obtainFreshBeanFactory()】--------创建Bean工厂BeanFactory--------------");
 			// Tell the subclass to refresh the internal bean factory.
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
-			logger.info("【AbstractApplicationContext】"+"------prepareBeanFactory准备beanFactory刷新------");
+			logger.info("----- 【3】【AbstractApplicationContext】【prepareBeanFactory(beanFactory)】--------准备工厂BeanFactory--------------");
 			// Prepare the bean factory for use in this context.
 			prepareBeanFactory(beanFactory);
 
 			try {
+				logger.info("-----【4】【AbstractApplicationContext】【postProcessBeanFactory(beanFactory)】--------实现BeanFactory的后置处理器--------------");
 				// Allows post-processing of the bean factory in context subclasses.
 				postProcessBeanFactory(beanFactory);
 
+				logger.info("-----【5】【AbstractApplicationContext】【postProcessBeanFactory(beanFactory)】--------执行Bean工厂的后置处理器--------------");
 				// Invoke factory processors registered as beans in the context.
 				invokeBeanFactoryPostProcessors(beanFactory);
 
+				logger.info("-----【6】【AbstractApplicationContext】【registerBeanPostProcessors(beanFactory)】--------注册Bean的后置处理器--------------");
 				// Register bean processors that intercept bean creation.
 				registerBeanPostProcessors(beanFactory);
 
@@ -598,6 +601,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			}
 		}
 
+		logger.info("-----【1.1】【AbstractApplicationContext】【initPropertySources()】--------初始化Propert资源--------------");
 		// Initialize any placeholder property sources in the context environment.
 		initPropertySources();
 
